@@ -1,0 +1,17 @@
+.main-action {
+    height: 15%;
+}
+.main-container{
+    display: flex;
+    height: 85%;
+}
+
+.left-container{
+    width: 30%;
+    height: 100%;
+}
+
+.right-containter{
+    width: 70%;
+    height: 100%;
+}
