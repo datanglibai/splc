@@ -1,3 +1,3 @@
-<p>
-  runrelogs works!
-</p>
+<div *ngFor="let rr of runRelogs$ | async">
+    <div class="run-relog-item">{{rr.name}}</div>
+</div>

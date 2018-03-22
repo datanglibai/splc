@@ -1,7 +1,7 @@
 <div class="container">
-<div class="splice-item">Active: {{ activeSpliceModel$ | async}}</div>
+<div class="splice-item">Active: {{ (activeSpliceModel$ | async)?.name }}</div>
 <div class="main-action">
-  <div *ngFor="let splice of spliceModels | async">
+  <div *ngFor="let splice of spliceModels$ | async">
     <div class="splice-item">{{splice.name}}</div>
   </div>
 </div>

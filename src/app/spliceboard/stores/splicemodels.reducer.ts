@@ -5,7 +5,7 @@ import { LOAD_SPLICES, LOAD_ACTIVE_SPLICE, SpliceActions } from "./actions";
 
 //export const initialState: SpliceModel[] = [];
 
-export function spliceModelsReducer(state = [], action: SpliceActions): SpliceModel[] {
+export function spliceModelsReducer(state = undefined, action: SpliceActions): SpliceModel[] {
     
     switch (action.type) {
         case LOAD_SPLICES:
@@ -20,6 +20,7 @@ export function spliceModelsReducer(state = [], action: SpliceActions): SpliceMo
 export function activepliceModelReducer(state = undefined, action: SpliceActions): SpliceModel {
     switch (action.type) {
         case LOAD_ACTIVE_SPLICE:
+        //console.log('in active splice reducer', action);
             return action.payload;
         default:
             return state;
