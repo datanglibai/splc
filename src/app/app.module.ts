@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { Routes } from '@angular/router';
 import { RouterModule } from '@angular/router';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 
 import { AppComponent } from './app.component';
@@ -24,7 +26,8 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
-    SpliceboardModule
+    SpliceboardModule,
+    StoreModule.forRoot({}),
   ],
   providers: [],
   bootstrap: [AppComponent]

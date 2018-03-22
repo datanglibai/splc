@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SpliceboardFacadeService } from '../services/spliceboard.facade.service';
 
 @Component({
   selector: 'run-relogs',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RunrelogsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private spliceModelFacadeService : SpliceboardFacadeService) { }
 
   ngOnInit() {
   }

@@ -1,5 +1,16 @@
+.container {
+    background-color: lightgray;
+}
 .main-action {
     height: 15%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 1.5rem;
+    display: flex;
+    align-content: center;
+    background-color: white;
+    margin-bottom: 5px;
+    padding-left: 5px;
 }
 .main-container{
     display: flex;
@@ -9,9 +20,18 @@
 .left-container{
     width: 30%;
     height: 100%;
+    background-color: white;
+    margin-right: 5px;
+    padding-left: 5px;
 }
 
-.right-containter{
+.right-container{
     width: 70%;
     height: 100%;
+    background-color: white;
+    padding-left: 5px;
+}
+
+.splice-item{
+    width:150px;
 }
