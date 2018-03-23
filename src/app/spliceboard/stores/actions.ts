@@ -2,6 +2,13 @@ import { Action } from '@ngrx/store';
 import { ViewSplice, ViewRuns, ViewRelogs, Splice, ViewChannelData, ViewDataColor, FocusedRunRelogs } from '../models';
 
 //Initialization related
+export const LOAD_ALL = '[Splice] Load All';
+export const START_LOAD_SPLICES = '[Splice] Load Splices';
+export const START_LOAD_RUNS = '[Splice] Load Runs';
+export const START_LOAD_RELOGS = '[Splice] Load Relogs';
+
+//
+
 export const LOAD_SPLICES = '[Splice] Load Splices';
 export const LOAD_ACTIVE_SPLICE = '[Splice] Load Active Splice';
 export const LOAD_RUNS = '[Splice] Load Runs';
