@@ -1,6 +1,14 @@
+<div>Run Relogs Viewer</div>
 <div *ngFor="let rr of (viewRuns$ | async)?.runs">
-    <div class="run-relog-item">{{rr.name}}</div>
+    <div class="run-relog-item">{{rr.name}}: {{rr.start}} - {{rr.stop}}</div>
 </div>
 <div *ngFor="let rr of (viewRelogs$ | async)?.relogs">
-    <div class="run-relog-item">{{rr.name}}</div>
+    <div class="run-relog-item">{{rr.name}}: {{rr.start}} - {{rr.stop}}</div>
+</div>
+<div>-------------</div>
+<div>
+    Focused Run relogs: {{(focusedRunRelogs$ | async)?.totalRange?.start}} - {{(focusedRunRelogs$ | async)?.totalRange?.stop}}
+    <div *ngFor="let rr of (focusedRunRelogs$ | async)?.runRelogs">
+            <div class="run-relog-item">{{rr.name}}: {{rr.start}} - {{rr.stop}}</div>
+        </div>
 </div>

@@ -1,17 +1,15 @@
 <div class="container">
     <div class="main-action">
         <div *ngFor="let splice of splices$ | async">
-            <div class="splice-item">{{splice.name}}</div>
+            <div class="splice-item" (click)="setActiveSplice(splice.name)">{{splice.name}}</div>
         </div>
-        <div class="splice-item">Active: {{ (activeSplice$ | async)?.splice.name }}</div>
+        <div class="splice-item" style="font-size:24px; background-color:lightblue">Active: {{ (activeSplice$ | async)?.splice.name }}</div>
     </div>
     <div class="main-container">
-        <div class="left-container">
-            <div>relogs viewer</div>
+        <div class="left-container">            
             <run-relogs></run-relogs>
         </div>
-        <div class="right-container">
-            <div>splic edit</div>
+        <div class="right-container">            
             <splice-edit></splice-edit>
         </div>
     </div>

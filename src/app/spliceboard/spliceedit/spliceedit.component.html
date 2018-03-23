@@ -1,3 +1,21 @@
-<p>
-  spliceedit works!
-</p>
+<div class="edit-container">
+  <div class="action-container">
+    <span>fragment actions: </span>
+    <button class="fragment-btn" (click)="addFragment()">add</button>
+    <button class="fragment-btn" (click)="updateFragment()">update</button>
+    <button class="fragment-btn" (click)="removeFragment()">delete</button>
+  </div>
+  <div class="data-conainter">
+    <div class="data-item-nav">Nav</div>
+    <div class="data-item">Preview Data
+      <div *ngFor="let v of previewData?.values">
+        <div class="channel-data">{{v}}</div>
+      </div>
+    </div>
+    <div class="data-item">Run Data
+      <div *ngFor="let v of previewData?.values">
+        <div class="channel-data">{{v}}</div>
+      </div>
+    </div>
+  </div>
+</div>
