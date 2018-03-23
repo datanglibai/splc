@@ -1,18 +1,18 @@
 <div class="container">
-<div class="splice-item">Active: {{ (activeSpliceModel$ | async)?.name }}</div>
-<div class="main-action">
-  <div *ngFor="let splice of spliceModels$ | async">
-    <div class="splice-item">{{splice.name}}</div>
-  </div>
-</div>
-<div class="main-container">
-  <div class="left-container">
-    <div>relogs viewer</div>
-    <run-relogs></run-relogs>
-  </div>
-  <div class="right-container">
-    <div>splic edit</div>
-    <splice-edit></splice-edit>
-  </div>
-</div>
+    <div class="splice-item">Active: {{ (activeSplice$ | async)?.splice.name }}</div>
+    <div class="main-action">
+        <div *ngFor="let splice of splices$ | async">
+            <div class="splice-item">{{splice.name}}</div>
+        </div>
+    </div>
+    <div class="main-container">
+        <div class="left-container">
+            <div>relogs viewer</div>
+            <run-relogs></run-relogs>
+        </div>
+        <div class="right-container">
+            <div>splic edit</div>
+            <splice-edit></splice-edit>
+        </div>
+    </div>
 </div>

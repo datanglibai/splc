@@ -3,7 +3,7 @@ import { ViewSplice, ViewRuns, ViewRelogs, Splice } from '../models';
 
 
 export const LOAD_SPLICES = '[Splice] Load Splices';
-export const LOAD_ACTIVE_SPLICE = '[Splice] Load Active Splices';
+export const LOAD_ACTIVE_SPLICE = '[Splice] Load Active Splice';
 export const LOAD_RUNS = '[Splice] Load Runs';
 export const LOAD_RELOGS = '[Splice] Load Relogs';
  
