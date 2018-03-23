@@ -1,11 +1,11 @@
 
-import { SpliceModel } from "../models";
+import { ViewSplice, Splice } from "../models";
 import { State, Action } from "@ngrx/store";
-import { LOAD_SPLICES, LOAD_ACTIVE_SPLICE, SpliceActions } from "./actions";
+import { LOAD_SPLICES, LOAD_ACTIVE_SPLICE, SpliceLoadActions } from "./actions";
 
 //export const initialState: SpliceModel[] = [];
 
-export function spliceModelsReducer(state = undefined, action: SpliceActions): SpliceModel[] {
+export function splicesReducer(state = undefined, action: SpliceLoadActions): Splice[] {
     
     switch (action.type) {
         case LOAD_SPLICES:
@@ -17,7 +17,7 @@ export function spliceModelsReducer(state = undefined, action: SpliceActions): S
 
 }
 
-export function activepliceModelReducer(state = undefined, action: SpliceActions): SpliceModel {
+export function activepliceReducer(state = undefined, action: SpliceLoadActions): ViewSplice {
     switch (action.type) {
         case LOAD_ACTIVE_SPLICE:
         //console.log('in active splice reducer', action);

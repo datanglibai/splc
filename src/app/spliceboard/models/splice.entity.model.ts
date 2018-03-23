@@ -1,4 +1,4 @@
-export interface SpliceModel{
+export interface Splice{
     name : string;
     fragments : Fragment[];
 }
@@ -9,10 +9,16 @@ export interface Fragment{
     stop :number;
 }
 
-export interface RunRelog {
+export interface Run {
     name:string;
     type:string;
     start:number;
     stop:number;
 }
 
+export interface Relog {
+    name:string;
+    type:string;
+    start:number;
+    stop:number;
+}

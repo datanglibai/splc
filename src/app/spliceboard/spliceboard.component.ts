@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SpliceboardFacadeService } from './services/spliceboard.facade.service';
-import { SpliceModel, RunRelog } from './models';
+import { Splice, Run } from './models';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 
@@ -12,13 +12,12 @@ import { Store } from '@ngrx/store';
 export class SpliceboardComponent implements OnInit {
   
   //private spliceModels:SpliceModel[];
-  private spliceModels$ : Observable<SpliceModel[]>;
-  private activeSpliceModel$ : Observable<SpliceModel>;
+  private splices$ : Observable<Splice[]>;
+  private activeSplice$ : Observable<Splice>;
 
   constructor(private spliceBoardFacadeService : SpliceboardFacadeService, private store:Store<any>) { 
-    this.spliceModels$ = this.spliceBoardFacadeService.spliceModels$;
-    this.activeSpliceModel$ = this.spliceBoardFacadeService.activeSpliceModel$;
-    
+    this.splices$ = this.spliceBoardFacadeService.splices$;
+    this.activeSplice$ = this.spliceBoardFacadeService.activeSplice$;
   }
 
   ngOnInit() {

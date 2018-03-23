@@ -1,13 +1,24 @@
 import { State, Action } from "@ngrx/store";
-import { RunRelog } from "../models";
-import { LOAD_RUN_RELOGS, SpliceActions } from "./actions";
+import { ViewRuns,ViewRelogs } from "../models";
+import { LOAD_RUNS, SpliceLoadActions } from "./actions";
+import { LOAD_RELOGS } from "./index";
 
 //export const initialState: SpliceModel[] = [];
   
-export function runRelogsReducer(state=undefined, action:SpliceActions) : RunRelog[]
+export function viewRunsReducer(state=undefined, action:SpliceLoadActions) : ViewRuns
 {
     switch (action.type) {
-        case LOAD_RUN_RELOGS:
+        case LOAD_RUNS:
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
+export function viewRelogsReducer(state=undefined, action:SpliceLoadActions) : ViewRelogs
+{
+    switch (action.type) {
+        case LOAD_RELOGS:
             return action.payload;
         default:
             return state;

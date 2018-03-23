@@ -7,8 +7,8 @@ import { SpliceboardFacadeService } from './services/spliceboard.facade.service'
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { reducers } from "./stores";
-import { spliceModels } from './mockdata/splicemodels';
-import { spliceModelsReducer } from './stores/splicemodels.reducer';
+import { splices } from './mockdata/splice.run.relog';
+import { splicesReducer } from './stores/splice.reducer';
 
 @NgModule({
   imports: [

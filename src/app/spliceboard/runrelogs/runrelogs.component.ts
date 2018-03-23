@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SpliceboardFacadeService } from '../services/spliceboard.facade.service';
 import { Observable } from 'rxjs/Observable';
-import { RunRelog } from '../models';
+import { ViewRuns } from '../models';
 
 @Component({
   selector: 'run-relogs',
@@ -10,9 +10,9 @@ import { RunRelog } from '../models';
 })
 export class RunrelogsComponent implements OnInit {
 
-  private runRelogs$:Observable<RunRelog[]>;
+  private viewRuns$:Observable<ViewRuns>;
   constructor(private spliceBoardFacadeService : SpliceboardFacadeService) { 
-    this.runRelogs$ = this.spliceBoardFacadeService.runRelogs$;
+    this.viewRuns$ = this.spliceBoardFacadeService.viewRuns$;
   }
 
   ngOnInit() {

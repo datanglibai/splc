@@ -1,10 +1,11 @@
-import {spliceModelsReducer, activepliceModelReducer} from './splicemodels.reducer';
-import {runRelogsReducer}from './runrelogs.reducer';
+import { splicesReducer, activepliceReducer } from './splice.reducer';
+import { viewRunsReducer, viewRelogsReducer } from './runrelogs.reducer';
 
 export const reducers = {
-    spliceModels: spliceModelsReducer,
-    activeSpliceModel: activepliceModelReducer,
-    runRelogs: runRelogsReducer,
-  };
+  splices: splicesReducer,
+  activeSplice: activepliceReducer,
+  viewRuns: viewRunsReducer,
+  viewRelogs: viewRelogsReducer,
+};
 
 export * from './actions';

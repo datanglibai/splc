@@ -1,1 +1,2 @@
-export * from './splice.model';
+export * from './splice.entity.model';
+export * from './splice.view.model';
