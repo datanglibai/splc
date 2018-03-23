@@ -1,11 +1,11 @@
 import { State, Action } from "@ngrx/store";
 import { ViewRuns,ViewRelogs } from "../models";
-import { LOAD_RUNS, SpliceLoadActions } from "./actions";
+import { LOAD_RUNS, LoadRuns, LoadRelogs } from "./actions";
 import { LOAD_RELOGS } from "./index";
 
 //export const initialState: SpliceModel[] = [];
   
-export function viewRunsReducer(state=undefined, action:SpliceLoadActions) : ViewRuns
+export function viewRunsReducer(state=undefined, action:LoadRuns) : ViewRuns
 {
     switch (action.type) {
         case LOAD_RUNS:
@@ -15,7 +15,7 @@ export function viewRunsReducer(state=undefined, action:SpliceLoadActions) : Vie
     }
 }
 
-export function viewRelogsReducer(state=undefined, action:SpliceLoadActions) : ViewRelogs
+export function viewRelogsReducer(state=undefined, action:LoadRelogs) : ViewRelogs
 {
     switch (action.type) {
         case LOAD_RELOGS:

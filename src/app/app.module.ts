@@ -4,6 +4,7 @@ import { Routes } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 
 import { AppComponent } from './app.component';
@@ -28,6 +29,11 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     SpliceboardModule,
     StoreModule.forRoot({}),
+    StoreDevtoolsModule.instrument({
+      name: 'Splice Store DevTools'
+      //,
+      //logOnly: environment.production,
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

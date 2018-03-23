@@ -24,23 +24,23 @@ export class SpliceboardFacadeService {
     this.viewRelogs$ = splice$.select("viewRelogs");
   }
   
-  public getAllRelativeData() {
-    this.getSplices();
-    this.getRuns();
-    this.getRelogs();
+  public load() {
+    this.loadSplices();
+    this.loadRuns();
+    this.loadRelogs();
   }
   
-  private getSplices() {
+  private loadSplices() {
     this.store.dispatch(new LoadSplices(splices));
     this.store.dispatch(new LoadActiveSplice({ splice: splices[0], loaded: true }));
 
   }
 
-  private getRuns(): any {
+  private loadRuns(): any {
     this.store.dispatch(new LoadRuns({ runs: runs, loaded: true }))
   }
 
-  private getRelogs(): any {
+  private loadRelogs(): any {
     this.store.dispatch(new LoadRelogs({ relogs: relogs, loaded: true }));
   }
 

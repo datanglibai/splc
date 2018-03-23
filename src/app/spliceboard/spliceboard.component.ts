@@ -21,7 +21,7 @@ export class SpliceboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.spliceBoardFacadeService.getAllRelativeData();
+    this.spliceBoardFacadeService.load();
   }
   ngAfterViewInit() {
   }

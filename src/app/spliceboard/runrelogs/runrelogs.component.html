@@ -1,3 +1,6 @@
 <div *ngFor="let rr of (viewRuns$ | async)?.runs">
     <div class="run-relog-item">{{rr.name}}</div>
 </div>
+<div *ngFor="let rr of (viewRelogs$ | async)?.relogs">
+    <div class="run-relog-item">{{rr.name}}</div>
+</div>
