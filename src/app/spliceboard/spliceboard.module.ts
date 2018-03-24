@@ -6,14 +6,13 @@ import { SpliceeditComponent } from './spliceedit/spliceedit.component';
 import { SpliceboardFacadeService } from './services/spliceboard.facade.service';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { reducers } from "./stores";
-import { LoadEffects } from './stores/effects';
+import { reducers, effects } from "./stores";
 
 @NgModule({
   imports: [
     CommonModule,
     StoreModule.forFeature('splice',reducers),
-    EffectsModule.forFeature([LoadEffects]),    
+    EffectsModule.forFeature(effects),    
   ],
   providers:[SpliceboardFacadeService],
   declarations: [SpliceboardComponent, RunrelogsComponent, SpliceeditComponent]

@@ -8,14 +8,14 @@
   <div class="data-container">
     <div class="data-item-nav">Nav</div>
     <div class="data-item">Preview Data
-      <div *ngFor="let v of previewData?.values">
-        <div class="channel-data">{{v}}</div>
+      <div *ngFor="let v of previewData?.values; let i = index">
+        <div class="channel-data">{{previewData.indexes[i]}}: {{v}}</div>
       </div>
     </div>
-    <div *ngFor="let rr of (focusedRunRelogs$ | async)?.runRelogs">
-      <div class="data-item">{{rr.name}}
-        <div *ngFor="let v of previewData?.values">
-          <div class="channel-data">{{v}}</div>
+    <div *ngFor="let dd of data$ | async">
+      <div class="data-item"> {{dd.mnemonic}}
+        <div *ngFor="let v of dd.values; let i = index">
+          <div class="channel-data">{{dd.indexes[i]}}: {{v}}</div>
         </div>
       </div>
     </div>

@@ -1,20 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
 import { Splice, Run, Fragment, Relog } from "../models/index";
 import { Observable } from 'rxjs/Observable';
-
 import { Store, State } from '@ngrx/store';
-import { LOAD_ALL } from '../stores';
+import { LOAD_ALL, ADD_FRAGMENT, UPDATE_FRAGMENT, DELETE_FRAGMENT } from '../stores';
 import { ViewSpliceModel, IndexRange, ViewSplice, ViewChannelData, FocusedRunRelogs } from "../models/splice.view.model";
-
-//data
-import { splices, runs, relogs, runData, relog1Data, relog2Data, focusedRunRelogs } from '../mockdata/splice.run.relog';
 
 @Injectable()
 export class SpliceboardFacadeService {
-
-
-
   public splice$: Store<any>;
   public activeSplice$: Observable<ViewSplice>;
   public splices$: Observable<Splice[]>;
@@ -47,6 +39,21 @@ export class SpliceboardFacadeService {
   public load() {
     this.store.dispatch({ type: LOAD_ALL });
   }
+
+  public AddFragment(){
+    this.store.dispatch({ type: ADD_FRAGMENT });
+
+  }
+
+  public UpdateFragment(){
+    this.store.dispatch({ type: UPDATE_FRAGMENT });
+  }
+
+  public RemoveFragment(){
+    this.store.dispatch({ type: DELETE_FRAGMENT });    
+  }
+
+  
   private selectActiveSplice(s: any): ViewSplice {
     // when updating the fragments, set loaded false and not emit active change.
     if (s.activeSplice && s.activeSplice.loaded)
@@ -61,7 +68,7 @@ export class SpliceboardFacadeService {
     }
   }
 
-  selectViewFragments(s: any): Fragment[] {
+  private selectViewFragments(s: any): Fragment[] {
     if (s.focusedRunRelogs && s.activeSplice && s.activeSplice.loaded) {
       //calculate viewed fragments here
       return [{ id: "1", start: 3000, stop: 3300 },

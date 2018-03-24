@@ -25,14 +25,12 @@
     margin-left: 2px;
 }
 
-.data-item-nav {    
-    width: 50px;
+.data-item-nav {
     height: 100%;
     margin: 2px;
 }
 
 .data-item {   
-    width: 20%;
     height: 100%;
     padding-left:2px;
     border-left: 2px;
