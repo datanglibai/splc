@@ -4,24 +4,14 @@ import { Splice, Run, Relog } from "./splice.entity.model";
 
 export interface ViewSplice {
     splice: Splice;
-    updateFragement: boolean;
-    loaded: boolean;
-}
-
-export interface ViewRuns {
-    runs: Run[];
-    loaded: boolean;
-}
-
-export interface ViewRelogs {
-    relogs: Relog[];
+    //updateFragement: boolean;
     loaded: boolean;
 }
 
 export interface ViewSpliceModel {
     activeSplice: ViewSplice;
-    viewRuns: ViewRuns;
-    viewRelogs: ViewRelogs;
+    runs: Run[];
+    relogs: Relog[];
     totalRange: IndexRange;
 }
 

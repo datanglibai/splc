@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SpliceboardFacadeService } from '../services/spliceboard.facade.service';
 import { Observable } from 'rxjs/Observable';
-import { ViewSpliceModel, ViewChannelData, ViewSplice } from '../models';
+import { ViewSpliceModel, ViewChannelData, ViewSplice, Fragment, FocusedRunRelogs } from '../models';
 
 @Component({
   selector: 'splice-edit',
@@ -12,12 +12,17 @@ export class SpliceeditComponent implements OnInit {
   private activeSplice$:Observable<ViewSplice>;
   private data$:Observable<ViewChannelData[]>;
   private previewData:ViewChannelData;
+  private viewedFragments$:Observable<Fragment[]>;
+  private focusedRunRelogs$: Observable<FocusedRunRelogs>;
   constructor(private spliceBoardFacadeService : SpliceboardFacadeService) { 
     this.activeSplice$ = this.spliceBoardFacadeService.activeSplice$;
     this.data$ = this.spliceBoardFacadeService.viewChannelData$;
+    this.viewedFragments$ = this.spliceBoardFacadeService.viewFragments$;
+    this.focusedRunRelogs$ = this.spliceBoardFacadeService.focusedRunRelogs$;
   }
 
   ngOnInit() {
+    this.focusedRunRelogs$.subscribe((v)=> {console.log('in splice edit', v)});
     this.data$.subscribe((data)=>{
       console.log('channel data state init in edit', data);
       if(data)
@@ -25,11 +30,6 @@ export class SpliceeditComponent implements OnInit {
         this.previewData = data[0];
       }
     })
-  }
-
-  private setActiveSplice(spliceName)
-  {
-    
   }
 
   private addFragment()

@@ -26,4 +26,10 @@ export class SpliceboardComponent implements OnInit {
   ngAfterViewInit() {
   }
 
+  private setActiveSplice(spliceName)
+  {
+    
+  }
+
+
 }

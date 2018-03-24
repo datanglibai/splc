@@ -29,6 +29,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     SpliceboardModule,
     StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({
       name: 'Splice Store DevTools'
       //,

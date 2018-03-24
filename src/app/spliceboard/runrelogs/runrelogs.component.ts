@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SpliceboardFacadeService } from '../services/spliceboard.facade.service';
 import { Observable } from 'rxjs/Observable';
-import { ViewRuns, ViewRelogs, ViewSplice , FocusedRunRelogs} from '../models';
+import { ViewSplice, Fragment, FocusedRunRelogs } from '../models';
 
 @Component({
   selector: 'run-relogs',
@@ -9,24 +9,21 @@ import { ViewRuns, ViewRelogs, ViewSplice , FocusedRunRelogs} from '../models';
   styleUrls: ['./runrelogs.component.css']
 })
 export class RunrelogsComponent implements OnInit {
-
-  private viewRuns$:Observable<ViewRuns>;
-  private viewRelogs$:Observable<ViewRelogs>;
-  private activeSplice$:Observable<ViewSplice>;
+  private runRelogs$;
+  private fragmentsOfActiveSplice$: Observable<Fragment[]>;
   private focusedRunRelogs$: Observable<FocusedRunRelogs>;
-  constructor(private spliceBoardFacadeService : SpliceboardFacadeService) { 
-    this.viewRuns$ = this.spliceBoardFacadeService.viewRuns$;
-    this.viewRelogs$ = this.spliceBoardFacadeService.viewRelogs$;
-    //this.spliceBoardFacadeService.viewSpliceModel$.subscribe(v=> console.log('combined state', v));
-    this.activeSplice$ = this.spliceBoardFacadeService.activeSplice$;
+  constructor(private spliceBoardFacadeService: SpliceboardFacadeService) {
+    this.runRelogs$ = this.spliceBoardFacadeService.runRelogs$;
+    this.fragmentsOfActiveSplice$ = this.spliceBoardFacadeService.fragmentsOfActiveSplice$;
     this.focusedRunRelogs$ = this.spliceBoardFacadeService.focusedRunRelogs$;
   }
 
   ngOnInit() {
-    this.activeSplice$.subscribe(v=>this.updateRelogStyles(v));    
+    this.focusedRunRelogs$.subscribe((v)=> {console.log('in run relogs', v)});
+    this.fragmentsOfActiveSplice$.subscribe(v => this.updateRelogStyles(v));
   }
 
-  private updateRelogStyles(activeSplice: ViewSplice){
+  private updateRelogStyles(activeSplice: Fragment[]) {
 
   }
 

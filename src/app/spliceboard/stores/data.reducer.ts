@@ -1,13 +1,13 @@
 import { State, Action } from "@ngrx/store";
 import { ViewChannelData, ViewDataColor } from "../models";
-import { DataActions, LOAD_CHANNEL_DATA, LOAD_DATA_COLOR, UPDATE_CHANNEL_DATA, UPDATE_DATA_COLOR } from "./actions";
+import { DataActions, CHANNEL_DATA_LOADED, DATA_COLOR_LOADED, CHANNEL_DATA_UPDATED, DATA_COLOR_UPDATED } from "./event.actions";
 
 
 export function viewChannelDataReducer(state = undefined, action: DataActions): ViewChannelData[] {
     switch (action.type) {
-        case LOAD_CHANNEL_DATA:
+        case CHANNEL_DATA_LOADED:
             return action.payload;
-        case UPDATE_CHANNEL_DATA:
+        case CHANNEL_DATA_UPDATED:
             return action.payload;
         default:
             return state;
@@ -16,9 +16,9 @@ export function viewChannelDataReducer(state = undefined, action: DataActions): 
 
 export function viewDataColorReducer(state = undefined, action: DataActions): ViewDataColor {
     switch (action.type) {
-        case LOAD_DATA_COLOR:
+        case DATA_COLOR_LOADED:
             return action.payload;
-        case UPDATE_DATA_COLOR:
+        case DATA_COLOR_UPDATED:
             return action.payload;
         default:
             return state;

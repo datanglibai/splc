@@ -5,16 +5,23 @@
     <button class="fragment-btn" (click)="updateFragment()">update</button>
     <button class="fragment-btn" (click)="removeFragment()">delete</button>
   </div>
-  <div class="data-conainter">
+  <div class="data-container">
     <div class="data-item-nav">Nav</div>
     <div class="data-item">Preview Data
       <div *ngFor="let v of previewData?.values">
         <div class="channel-data">{{v}}</div>
       </div>
     </div>
-    <div class="data-item">Run Data
-      <div *ngFor="let v of previewData?.values">
-        <div class="channel-data">{{v}}</div>
+    <div *ngFor="let rr of (focusedRunRelogs$ | async)?.runRelogs">
+      <div class="data-item">{{rr.name}}
+        <div *ngFor="let v of previewData?.values">
+          <div class="channel-data">{{v}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="data-item">
+      <div *ngFor="let f of viewedFragments$ | async">
+        <div>fragment: {{f.start}} -- {{f.stop}}</div>
       </div>
     </div>
   </div>
