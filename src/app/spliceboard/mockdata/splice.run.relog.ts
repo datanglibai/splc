@@ -4,17 +4,17 @@ export const splices: Splice[] = [
     {
         name: "splice 1",
         fragments:
-            [
-                {
-                    id: "1",                    
-                    start: 3000,
-                    stop: 3300
-                },
-                {
-                    id: "2",
-                    start: 3400,
-                    stop: 3800
-                }]
+        [
+            {
+                id: "1",
+                start: 3000,
+                stop: 3300
+            },
+            {
+                id: "2",
+                start: 3400,
+                stop: 3800
+            }]
     },
     {
         name: "splice 2",
@@ -80,18 +80,20 @@ export const relog2Data: ViewChannelData = {
 }
 
 export const focusedRunRelogs: FocusedRunRelogs = {
-    runRelogs:[{
+    runRelogs: [{
         name: "Run1",
         type: "Run",
         start: 2000,
         stop: 4000
-    },{
+    }, {
         name: "Relog1",
         type: "Relog",
         start: 3000,
         stop: 3950
     }],
-    totalRange: {start:3000, stop:3950}
+    viewFragements: [{ id: "1", start: 3000, stop: 3300 },
+    { id: "2", start: 3400, stop: 3800 }],
+    totalRange: { start: 3000, stop: 3950 }
 }
 
 

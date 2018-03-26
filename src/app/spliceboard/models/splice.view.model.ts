@@ -1,6 +1,6 @@
 
 
-import { Splice, Run, Relog } from "./splice.entity.model";
+import { Splice, Run, Relog, Fragment } from "./splice.entity.model";
 
 export interface ViewSplice {
     splice: Splice;
@@ -33,6 +33,7 @@ export interface ViewDataColor {
 export interface FocusedRunRelogs
 {
     runRelogs:Run[],
+    viewFragements: Fragment[],
     totalRange: IndexRange
 }
 

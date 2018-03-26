@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { Splice, Run, Fragment, Relog } from "../models/index";
 import { Observable } from 'rxjs/Observable';
 import { Store, State } from '@ngrx/store';
-import { LOAD_ALL, ADD_FRAGMENT, UPDATE_FRAGMENT, DELETE_FRAGMENT } from '../stores';
+import { LOAD_ALL, ADD_FRAGMENT, UPDATE_FRAGMENT, DELETE_FRAGMENT, FocusedRunRelogsSet } from '../stores';
 import { ViewSpliceModel, IndexRange, ViewSplice, ViewChannelData, FocusedRunRelogs } from "../models/splice.view.model";
+import * as mockData from '../mockdata/splice.run.relog';
 
 @Injectable()
 export class SpliceboardFacadeService {
@@ -27,12 +28,13 @@ export class SpliceboardFacadeService {
     this.viewChannelData$ = this.splice$.select("viewChannelData");
     this.viewChannelColor$ = this.splice$.select("viewChannelColor");
     this.focusedRunRelogs$ = this.splice$.select("focusedRunRelogs");
+    this.activeSplice$ = this.splice$.select("activeSplice");
 
-    this.activeSplice$ = this.splice$.select(s => this.selectActiveSplice(s));
+   // this.activeSplice$ = this.splice$.select(s => this.selectActiveSplice(s));
     this.fragmentsOfActiveSplice$ = this.splice$.select(s => s.activeSplice.fragments);
     this.viewSpliceModel$ = this.splice$.select(s => this.selectViewSpliceModel(s));
     this.runRelogs$ = this.splice$.select(s => this.selectRunsRelogs(s));
-    this.viewFragments$ = this.splice$.select(s => this.selectViewFragments(s));
+    //this.viewFragments$ = this.splice$.select(s => this.selectViewFragments(s));
     this.totalRange$ = this.splice$.select(s => this.selectTotalRange(s));
   }
 
@@ -61,20 +63,20 @@ export class SpliceboardFacadeService {
   }
   private selectViewSpliceModel(s: any): ViewSpliceModel {
     if (s.activeSplice && s.activeSplice.loaded &&
-      s.runs && s.relogs && s.relogs.loaded) {
-      //calculate range here
-
+      s.runs && s.relogs) {
+      //calculate range here      
+      this.store.dispatch(new FocusedRunRelogsSet(mockData.focusedRunRelogs));
       return { activeSplice: s.activeSplice, runs: s.runs, relogs: s.relogs, totalRange: { start: 2000, stop: 6000 } }
     }
   }
 
-  private selectViewFragments(s: any): Fragment[] {
-    if (s.focusedRunRelogs && s.activeSplice && s.activeSplice.loaded) {
-      //calculate viewed fragments here
-      return [{ id: "1", start: 3000, stop: 3300 },
-      { id: "2", start: 3400, stop: 3800 }]
-    }
-  }
+  // private selectViewFragments(s: any): Fragment[] {
+  //   if (s.focusedRunRelogs && s.activeSplice && s.activeSplice.loaded) {
+  //     //calculate viewed fragments here
+  //     return [{ id: "1", start: 3000, stop: 3300 },
+  //     { id: "2", start: 3400, stop: 3800 }]
+  //   }
+  // }
 
   private selectRunsRelogs(s: any): any {
     if (s.runs && s.relogs) {

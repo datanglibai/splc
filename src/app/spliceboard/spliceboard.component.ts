@@ -17,7 +17,7 @@ export class SpliceboardComponent implements OnInit {
 
   constructor(private spliceBoardFacadeService : SpliceboardFacadeService, private store:Store<any>) { 
     this.splices$ = this.spliceBoardFacadeService.splices$;
-    this.activeSplice$ = this.spliceBoardFacadeService.activeSplice$;
+    //this.activeSplice$ = this.spliceBoardFacadeService.activeSplice$;
   }
 
   ngOnInit() {    

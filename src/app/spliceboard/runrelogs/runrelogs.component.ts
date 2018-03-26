@@ -10,17 +10,21 @@ import { ViewSplice, Fragment, FocusedRunRelogs } from '../models';
 })
 export class RunrelogsComponent implements OnInit {
   private runRelogs$;
+  private viewSpliceModel$;
   private fragmentsOfActiveSplice$: Observable<Fragment[]>;
   private focusedRunRelogs$: Observable<FocusedRunRelogs>;
   constructor(private spliceBoardFacadeService: SpliceboardFacadeService) {
     this.runRelogs$ = this.spliceBoardFacadeService.runRelogs$;
     this.fragmentsOfActiveSplice$ = this.spliceBoardFacadeService.fragmentsOfActiveSplice$;
+    //this.viewSpliceModel$ = this.spliceBoardFacadeService.viewSpliceModel$;
     this.focusedRunRelogs$ = this.spliceBoardFacadeService.focusedRunRelogs$;
   }
 
   ngOnInit() {
     this.focusedRunRelogs$.subscribe((v)=> {console.log('in run relogs', v)});
+    //this.viewSpliceModel$.subscribe((v)=> {console.log('in run relogs', v)});
     this.fragmentsOfActiveSplice$.subscribe(v => this.updateRelogStyles(v));
+
   }
 
   private updateRelogStyles(activeSplice: Fragment[]) {

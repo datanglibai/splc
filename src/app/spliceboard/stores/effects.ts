@@ -4,7 +4,12 @@ import * as cmdActions from "./command.actions";
 import * as eventActions from './event.actions'
 import * as mockData from '../mockdata/splice.run.relog';
 import { Injectable } from "@angular/core";
-import { switchMap, map, catchError, mergeMap } from 'rxjs/operators';
+import { switchMap, map, zip, flatMap } from 'rxjs/operators';
+//import 'rxjs/add/operator/zip';
+import { Observable } from 'rxjs/Observable';
+import "rxjs/add/observable/zip"
+import "rxjs/add/operator/map"
+
 
 @Injectable()
 export class LoadEffects {
@@ -41,24 +46,41 @@ export class LoadEffects {
 
 @Injectable()
 export class FocusedRunRelogsEffect {
-    constructor(private actions: Actions) { }    
-    
-    
+    constructor(private actions: Actions) { }
+
+
     //
     //focused runRelogsSet should be aggerate of run, relogs and activeSplice
     //new eventActions.FocusedRunRelogsSet(mockData.focusedRunRelogs)
     //
     //
-    @Effect() ToSetFocus =  this.actions.pipe(ofType(eventActions.ACTIVE_SPLICE_SET), map(() => (        
-        new eventActions.FocusedRunRelogsSet(mockData.focusedRunRelogs))
-    ));
+
+    // @Effect() ToSetFocus = this.actions.pipe(ofType('SPLICE_MODEL_SET'), map(() => (
+    //     //call service to calculate default focused Run Relogs
+    //     new eventActions.FocusedRunRelogsSet(mockData.focusedRunRelogs))
+    // ));
+
+    @Effect() aggregate = this.actions.pipe(
+        zip(this.actions.ofType(eventActions.RELOGS_LOADED),
+            this.actions.ofType(eventActions.RUNS_LOADED)),
+        map(([a, b, c]) => {
+            console.log(a, b, c);
+            return new eventActions.FocusedRunRelogsSet(mockData.focusedRunRelogs)
+        }));
+
+    @Effect() aggregate2 = Observable.zip(
+        this.actions.ofType(eventActions.RELOGS_LOADED),
+        this.actions.ofType(eventActions.RUNS_LOADED)).map((a)=>{
+            console.log("+++++++++++",a);
+            return new eventActions.FocusedRunRelogsSet(mockData.focusedRunRelogs);
+        });
 
     @Effect() FocusedRunRelogsSet = this.actions.pipe(ofType(eventActions.FOCUSED_RUN_RELOGS_SET), switchMap(() => (
         //http request to get datahere
         [new eventActions.ChannelDataLoaded([mockData.runData, mockData.relog1Data]),
         new eventActions.DataColorLoaded(undefined)])
     ));
-    
+
 }
 
 

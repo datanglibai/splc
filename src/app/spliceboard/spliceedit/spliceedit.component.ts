@@ -14,14 +14,17 @@ export class SpliceeditComponent implements OnInit {
   private previewData:ViewChannelData;
   private viewedFragments$:Observable<Fragment[]>;
   private focusedRunRelogs$: Observable<FocusedRunRelogs>;
+  private viewSpliceModel$;
   constructor(private spliceBoardFacadeService : SpliceboardFacadeService) { 
     this.activeSplice$ = this.spliceBoardFacadeService.activeSplice$;
     this.data$ = this.spliceBoardFacadeService.viewChannelData$;
     this.viewedFragments$ = this.spliceBoardFacadeService.viewFragments$;
     this.focusedRunRelogs$ = this.spliceBoardFacadeService.focusedRunRelogs$;
+    //this.viewSpliceModel$ = this.spliceBoardFacadeService.viewSpliceModel$;
   }
 
   ngOnInit() {
+    //this.viewSpliceModel$.subscribe((v)=> {console.log('in run relogs', v)});
     this.focusedRunRelogs$.subscribe((v)=> {console.log('in splice edit', v)});
     this.data$.subscribe((data)=>{
       console.log('channel data state init in edit', data);
