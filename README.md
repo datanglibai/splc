@@ -2,6 +2,12 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.3.
 
+## Issues to be considered/discussed
+Data/color calulation and load seems only related to fragments state
+### Cache
+ Runs/Relogs Data.
+ borehole data is not required to load again, to keep workflow clean, consider use cache of channel compose service or data service.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.

@@ -4,7 +4,7 @@ import { Splice, Run, Relog, Fragment } from "./splice.entity.model";
 
 export interface ViewSplice {
     splice: Splice;
-    //updateFragement: boolean;
+    updateFragement: boolean;
     loaded: boolean;
 }
 

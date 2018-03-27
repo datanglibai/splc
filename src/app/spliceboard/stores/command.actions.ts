@@ -1,4 +1,4 @@
-import { Fragment } from "../models";
+import { Fragment, ViewSplice } from "../models";
 import { Action } from "@ngrx/store";
 
 export const LOAD_ALL = '[Splice] Load All';
@@ -7,6 +7,11 @@ export const LOAD_RUNS = '[Splice] Load Runs';
 export const LOAD_RELOGS = '[Splice] Load Relogs';
 export const LOAD_BOREHOLEDATA = '[Splice] Load Borehoe Data';
 
+export const SWITCH_ACTIVE_SPLICE = '[Splice] Switch Active Splice';
+export class SwitchActiveSplice implements Action {
+    readonly type = ADD_FRAGMENT;
+    constructor(public payload: ViewSplice) { }
+}
 
 export const ADD_FRAGMENT = '[Splice] Add Fragement';
 export const UPDATE_FRAGMENT = '[Splice] Update Fragement';

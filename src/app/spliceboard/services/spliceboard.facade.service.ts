@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Splice, Run, Fragment, Relog } from "../models/index";
 import { Observable } from 'rxjs/Observable';
 import { Store, State } from '@ngrx/store';
-import { LOAD_ALL, ADD_FRAGMENT, UPDATE_FRAGMENT, DELETE_FRAGMENT, FocusedRunRelogsSet, ChannelDataUpdated, DataColorUpdated } from '../stores';
-import { ViewSpliceModel, IndexRange, ViewSplice, ViewChannelData, FocusedRunRelogs } from "../models/splice.view.model";
+import { LOAD_ALL, ADD_FRAGMENT, UPDATE_FRAGMENT, DELETE_FRAGMENT, AddFragment, FocusedRunRelogsSet, ChannelDataUpdated, DataColorUpdated, ActiveSpliceSet } from '../stores';
+import { ViewSpliceModel, IndexRange, ViewSplice, ViewChannelData, FocusedRunRelogs } from "../models";
 import * as mockData from '../mockdata/splice.run.relog';
 
 @Injectable()
@@ -29,24 +29,28 @@ export class SpliceboardFacadeService {
     this.focusedRunRelogs$ = this.splice$.select("focusedRunRelogs");
     this.activeSplice$ = this.splice$.select("activeSplice");
 
-    this.fragmentsOfActiveSplice$ = this.splice$.select(s => s.activeSplice.fragments);
+    this.fragmentsOfActiveSplice$ = this.splice$.select(s=>this.selectFragmentsOfActiveSplice(s));
     this.viewSpliceModel$ = this.splice$.select(s => this.selectViewSpliceModel(s));
     this.runRelogs$ = this.splice$.select(s => this.selectRunsRelogs(s));
-    //this.viewFragments$ = this.splice$.select(s => this.selectViewFragments(s));
-    // this.fragmentsOfActiveSplice$.subscribe((v)=>{
-    //   //calculate 
-      
-    //   this.store.dispatch(new ChannelDataUpdated(undefined));
-    //   this.store.dispatch(new DataColorUpdated(undefined));
-    // })
+    this.viewFragments$ = this.splice$.select(s => this.selectViewFragments(s));
+    this.fragmentsOfActiveSplice$.subscribe((v)=>{
+      //calculate 
+      this.store.dispatch(new ChannelDataUpdated([mockData.updatedRunData,mockData.relog1Data]));
+      this.store.dispatch(new DataColorUpdated(undefined));
+    })
   }
 
   public load() {
     this.store.dispatch({ type: LOAD_ALL });
   }
 
+  public switchActiveSplice(s:ViewSplice)
+  {
+    this.store.dispatch(new ActiveSpliceSet(s));
+  }
+
   public AddFragment(){
-    this.store.dispatch({ type: ADD_FRAGMENT });
+    this.store.dispatch(new AddFragment(mockData.fragmentSample));
 
   }
 
@@ -58,6 +62,11 @@ export class SpliceboardFacadeService {
     this.store.dispatch({ type: DELETE_FRAGMENT });    
   }
   
+  private selectFragmentsOfActiveSplice(s: any): Fragment[] {
+    // when updating the fragments, set loaded false and not emit active change.
+    if (s.activeSplice )
+      return s.activeSplice.fragments;
+  }
   private selectActiveSplice(s: any): ViewSplice {
     // when updating the fragments, set loaded false and not emit active change.
     if (s.activeSplice && s.activeSplice.loaded)
@@ -71,13 +80,12 @@ export class SpliceboardFacadeService {
     }
   }
 
-  // private selectViewFragments(s: any): Fragment[] {
-  //   if (s.focusedRunRelogs && s.activeSplice && s.activeSplice.loaded) {
-  //     //calculate viewed fragments here
-  //     return [{ id: "1", start: 3000, stop: 3300 },
-  //     { id: "2", start: 3400, stop: 3800 }]
-  //   }
-  // }
+  private selectViewFragments(s: any): Fragment[] {
+    if (s.focusedRunRelogs && s.activeSplice && s.activeSplice.loaded) {
+      //calculate viewed fragments here
+      return [{ id: "1", start: 3000, stop: 3300 }]
+    }
+  }
 
   private selectRunsRelogs(s: any): any {
     if (s.runs && s.relogs) {

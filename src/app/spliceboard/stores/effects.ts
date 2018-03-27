@@ -25,7 +25,7 @@ export class LoadEffects {
     @Effect() LoadSplices = this.actions.pipe(ofType(cmdActions.LOAD_SPLICES), switchMap(() => (
         //http request here
         [new eventActions.SplicesLoaded(mockData.splices),
-        new eventActions.ActiveSpliceSet({ splice: mockData.splices[0], loaded: true })])
+        new eventActions.ActiveSpliceSet({ splice: mockData.splices[0], updateFragement: false, loaded: true })])
     ));
 
     @Effect() LoadRuns = this.actions.pipe(ofType(cmdActions.LOAD_RUNS), map(() => (
@@ -41,6 +41,17 @@ export class LoadEffects {
     @Effect() LoadBoreholeData = this.actions.pipe(ofType(cmdActions.LOAD_BOREHOLEDATA), map(() => (
         //http request here
         new eventActions.ChannelDataLoaded([mockData.runData]))
+    ));
+
+    //the reason is not make load runs/relogs after active splice because sometimes there is no splice.
+    @Effect() SwitchActiveSplice = this.actions.pipe(
+        ofType(cmdActions.SWITCH_ACTIVE_SPLICE),
+        switchMap((action:any)=>[
+            new eventActions.ActiveSpliceSet(action.payload),
+            { type: cmdActions.LOAD_RUNS },
+            { type: cmdActions.LOAD_RELOGS },
+            { type: cmdActions.LOAD_BOREHOLEDATA }
+        ]
     ));
 }
 
@@ -59,13 +70,7 @@ export class FocusedRunRelogsEffect {
             return new eventActions.FocusedRunRelogsSet(mockData.focusedRunRelogs)
         }));
 
-    // @Effect() aggregate2 = Observable.zip(
-    //     this.actions.ofType(eventActions.RELOGS_LOADED),
-    //     this.actions.ofType(eventActions.RUNS_LOADED)).map((a)=>{
-    //         console.log("+++++++++++",a);
-    //         return new eventActions.FocusedRunRelogsSet(mockData.focusedRunRelogs);
-    //     });
-
+    //this may not be needed, since the dataload should be to associate with fragments state.
     @Effect() FocusedRunRelogsSet = this.actions.pipe(ofType(eventActions.FOCUSED_RUN_RELOGS_SET), switchMap(() => (
         //http request to get datahere
         [new eventActions.ChannelDataLoaded([mockData.runData, mockData.relog1Data]),
