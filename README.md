@@ -4,6 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Issues to be considered/discussed
 Data/color calulation and load seems only related to fragments state
+whether the command action of manage fragments is required or not?
 ### Cache
  Runs/Relogs Data.
  borehole data is not required to load again, to keep workflow clean, consider use cache of channel compose service or data service.
