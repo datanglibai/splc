@@ -20,7 +20,7 @@ export class SpliceeditComponent implements OnInit {
     this.data$ = this.spliceBoardFacadeService.viewChannelData$;
     this.viewedFragments$ = this.spliceBoardFacadeService.viewFragments$;
     this.focusedRunRelogs$ = this.spliceBoardFacadeService.focusedRunRelogs$;
-    //this.viewSpliceModel$ = this.spliceBoardFacadeService.viewSpliceModel$;
+    this.viewSpliceModel$ = this.spliceBoardFacadeService.viewSpliceModel$;
   }
 
   ngOnInit() {

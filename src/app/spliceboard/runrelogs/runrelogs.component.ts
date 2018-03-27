@@ -9,14 +9,14 @@ import { ViewSplice, Fragment, FocusedRunRelogs } from '../models';
   styleUrls: ['./runrelogs.component.css']
 })
 export class RunrelogsComponent implements OnInit {
-  private runRelogs$;
+  //private runRelogs$;
   private viewSpliceModel$;
   private fragmentsOfActiveSplice$: Observable<Fragment[]>;
   private focusedRunRelogs$: Observable<FocusedRunRelogs>;
   constructor(private spliceBoardFacadeService: SpliceboardFacadeService) {
-    this.runRelogs$ = this.spliceBoardFacadeService.runRelogs$;
+    //this.runRelogs$ = this.spliceBoardFacadeService.runRelogs$;
     this.fragmentsOfActiveSplice$ = this.spliceBoardFacadeService.fragmentsOfActiveSplice$;
-    //this.viewSpliceModel$ = this.spliceBoardFacadeService.viewSpliceModel$;
+    this.viewSpliceModel$ = this.spliceBoardFacadeService.viewSpliceModel$;
     this.focusedRunRelogs$ = this.spliceBoardFacadeService.focusedRunRelogs$;
   }
 

@@ -9,6 +9,7 @@ import { switchMap, map, zip, flatMap } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
 import "rxjs/add/observable/zip"
 import "rxjs/add/operator/map"
+import { ACTIVE_SPLICE_FRAGMENTS_ADD } from "./event.actions";
 
 
 @Injectable()
@@ -48,32 +49,22 @@ export class LoadEffects {
 export class FocusedRunRelogsEffect {
     constructor(private actions: Actions) { }
 
-
-    //
-    //focused runRelogsSet should be aggerate of run, relogs and activeSplice
-    //new eventActions.FocusedRunRelogsSet(mockData.focusedRunRelogs)
-    //
-    //
-
-    // @Effect() ToSetFocus = this.actions.pipe(ofType('SPLICE_MODEL_SET'), map(() => (
-    //     //call service to calculate default focused Run Relogs
-    //     new eventActions.FocusedRunRelogsSet(mockData.focusedRunRelogs))
-    // ));
-
     @Effect() aggregate = this.actions.pipe(
-        zip(this.actions.ofType(eventActions.RELOGS_LOADED),
+        zip(
+            this.actions.ofType(eventActions.ACTIVE_SPLICE_SET),
+            this.actions.ofType(eventActions.RELOGS_LOADED),
             this.actions.ofType(eventActions.RUNS_LOADED)),
-        map(([a, b, c]) => {
-            console.log(a, b, c);
+        map(([a, b, c, d]) => {
+            console.log('++++++++++++', a, b, c, d);
             return new eventActions.FocusedRunRelogsSet(mockData.focusedRunRelogs)
         }));
 
-    @Effect() aggregate2 = Observable.zip(
-        this.actions.ofType(eventActions.RELOGS_LOADED),
-        this.actions.ofType(eventActions.RUNS_LOADED)).map((a)=>{
-            console.log("+++++++++++",a);
-            return new eventActions.FocusedRunRelogsSet(mockData.focusedRunRelogs);
-        });
+    // @Effect() aggregate2 = Observable.zip(
+    //     this.actions.ofType(eventActions.RELOGS_LOADED),
+    //     this.actions.ofType(eventActions.RUNS_LOADED)).map((a)=>{
+    //         console.log("+++++++++++",a);
+    //         return new eventActions.FocusedRunRelogsSet(mockData.focusedRunRelogs);
+    //     });
 
     @Effect() FocusedRunRelogsSet = this.actions.pipe(ofType(eventActions.FOCUSED_RUN_RELOGS_SET), switchMap(() => (
         //http request to get datahere
@@ -90,13 +81,21 @@ export class FragmentEffects {
 
     @Effect() AddFragment = this.actions.pipe(
         ofType(cmdActions.ADD_FRAGMENT),
-        switchMap((action: any) => (
+        map((action: any) => (
             //at the same time update fragment of active splice.
             //calculate data and color here
-            [new eventActions.ActiveSpliceFragmentAdd(action.payload),
-            new eventActions.ChannelDataUpdated([mockData.runData]),
-            new eventActions.DataColorUpdated(undefined)
-            ]
-        )
-        ));
+            new eventActions.ActiveSpliceFragmentAdd(action.payload)
+
+        )));
+
+    // @Effect() SpliceFragmentAdded = this.actions.pipe(
+    //     ofType(ACTIVE_SPLICE_FRAGMENTS_ADD),
+    //     switchMap((action: any) => (
+    //         //at the same time update fragment of active splice.
+    //         //calculate data and color here
+    //         [new eventActions.ChannelDataUpdated([mockData.runData]),
+    //         new eventActions.DataColorUpdated(undefined)
+    //         ]
+    //     )
+    //     ))
 }

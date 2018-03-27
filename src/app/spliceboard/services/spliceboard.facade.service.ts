@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Splice, Run, Fragment, Relog } from "../models/index";
 import { Observable } from 'rxjs/Observable';
 import { Store, State } from '@ngrx/store';
-import { LOAD_ALL, ADD_FRAGMENT, UPDATE_FRAGMENT, DELETE_FRAGMENT, FocusedRunRelogsSet } from '../stores';
+import { LOAD_ALL, ADD_FRAGMENT, UPDATE_FRAGMENT, DELETE_FRAGMENT, FocusedRunRelogsSet, ChannelDataUpdated, DataColorUpdated } from '../stores';
 import { ViewSpliceModel, IndexRange, ViewSplice, ViewChannelData, FocusedRunRelogs } from "../models/splice.view.model";
 import * as mockData from '../mockdata/splice.run.relog';
 
@@ -20,7 +20,6 @@ export class SpliceboardFacadeService {
   public runRelogs$;
   public viewSpliceModel$: Observable<ViewSpliceModel>;
   public viewFragments$: Observable<Fragment[]>;
-  public totalRange$: Observable<IndexRange>;
 
   constructor(private store: Store<any>) {
     this.splice$ = this.store.select('splice');
@@ -30,12 +29,16 @@ export class SpliceboardFacadeService {
     this.focusedRunRelogs$ = this.splice$.select("focusedRunRelogs");
     this.activeSplice$ = this.splice$.select("activeSplice");
 
-   // this.activeSplice$ = this.splice$.select(s => this.selectActiveSplice(s));
     this.fragmentsOfActiveSplice$ = this.splice$.select(s => s.activeSplice.fragments);
     this.viewSpliceModel$ = this.splice$.select(s => this.selectViewSpliceModel(s));
     this.runRelogs$ = this.splice$.select(s => this.selectRunsRelogs(s));
     //this.viewFragments$ = this.splice$.select(s => this.selectViewFragments(s));
-    this.totalRange$ = this.splice$.select(s => this.selectTotalRange(s));
+    // this.fragmentsOfActiveSplice$.subscribe((v)=>{
+    //   //calculate 
+      
+    //   this.store.dispatch(new ChannelDataUpdated(undefined));
+    //   this.store.dispatch(new DataColorUpdated(undefined));
+    // })
   }
 
   public load() {
@@ -54,7 +57,6 @@ export class SpliceboardFacadeService {
   public RemoveFragment(){
     this.store.dispatch({ type: DELETE_FRAGMENT });    
   }
-
   
   private selectActiveSplice(s: any): ViewSplice {
     // when updating the fragments, set loaded false and not emit active change.
@@ -65,7 +67,6 @@ export class SpliceboardFacadeService {
     if (s.activeSplice && s.activeSplice.loaded &&
       s.runs && s.relogs) {
       //calculate range here      
-      this.store.dispatch(new FocusedRunRelogsSet(mockData.focusedRunRelogs));
       return { activeSplice: s.activeSplice, runs: s.runs, relogs: s.relogs, totalRange: { start: 2000, stop: 6000 } }
     }
   }
@@ -82,13 +83,6 @@ export class SpliceboardFacadeService {
     if (s.runs && s.relogs) {
       //calculate range here
       return { runs: s.runs, relogs: s.relogs, totalRange: { start: 2000, stop: 6000 } }
-    }
-  }
-
-  private selectTotalRange(s: any): IndexRange {
-    if (s.runs && s.relogs &&
-      s.runs.loaded && s.relogs.loaded) {
-      return { start: 2000, stop: 6000 };
     }
   }
 
